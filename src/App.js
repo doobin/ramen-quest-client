@@ -10,6 +10,8 @@ import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import Title from './components/Title'
 import Form from './components/Form'
+import Restaurant from './components/Restaurant'
+import SearchNearMeButton from './components/SearchNearMeButton'
 
 class App extends Component {
   constructor () {
@@ -59,6 +61,8 @@ class App extends Component {
         </main>
         <Title />
         <Form />
+        <SearchNearMeButton />
+        <Restaurant />
       </React.Fragment>
     )
   }

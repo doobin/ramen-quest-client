@@ -5,11 +5,10 @@ class Form extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
-          <SearchField
-            placeholder="Search..."
-          />
-        </form>
+        <SearchField
+          placeholder="Search..."
+          onSubmit={this.handleSubmit}
+        />
       </React.Fragment>
     )
   }
