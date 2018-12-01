@@ -12,6 +12,7 @@ import Title from './components/Title'
 import Form from './components/Form'
 import Restaurant from './components/Restaurant'
 import SearchNearMeButton from './components/SearchNearMeButton'
+import Container from './components/Container'
 
 class App extends Component {
   constructor () {
@@ -60,9 +61,10 @@ class App extends Component {
           )} />
         </main>
         <Title />
-        <Form />
+        <Form getRestaurant={this.getRestaurant}/>
         <SearchNearMeButton />
         <Restaurant />
+        <Container />
       </React.Fragment>
     )
   }

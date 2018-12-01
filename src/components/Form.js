@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import SearchField from 'react-search-field'
 
 class Form extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <SearchField
-          placeholder="Search..."
-          onSubmit={this.handleSubmit}
-        />
+        <form onSubmit={this.props.getRestaurant}>
+          <input type='text' name='city' placeholder='Search...'/>
+          <button>Get Ramen</button>
+        </form>
       </React.Fragment>
     )
   }
