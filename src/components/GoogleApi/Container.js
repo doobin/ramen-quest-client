@@ -1,12 +1,18 @@
 import React from 'react'
 import Map, {GoogleApiWrapper} from 'google-maps-react'
+import {searchNearby} from './GoogleApiHelpers'
 
 export class Container extends React.Component {
+
+  onReady (props, map) {
+
+  }
+
   render () {
     return (
       <div>
-      Hello from the container
         <Map
+          onReady={this.onReady.bind(this)}
           google={this.props.google} />
       </div>
     )

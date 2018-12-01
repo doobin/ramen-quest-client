@@ -12,7 +12,7 @@ import Title from './components/Title'
 import Form from './components/Form'
 import Restaurant from './components/Restaurant'
 import SearchNearMeButton from './components/SearchNearMeButton'
-import Container from './components/Container'
+import Container from './components/GoogleApi/Container'
 
 class App extends Component {
   constructor () {
