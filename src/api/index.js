@@ -16,7 +16,7 @@ class Helper {
     if (!urlParams) {
       return ''
     }
-    return Oject.keys(urlParams)
+    return Object.keys(urlParams)
       .map(key => `${key}=${urlParams[key]}`)
       .join('&')
   }
@@ -26,14 +26,27 @@ class Helper {
     }
   }
   static simpleFetch (endPoint, method, urlParams) {
-    let requestData = {
+    const requestData = {
       method,
       headers: Helper.headers()
     }
-    return fetch(`${Helper.baseURL()}${endPoint}?${Helper.auth}&${Helper.urlBuilder(
-      urlParams
-    )}`,
-    requestData
+    return fetch(
+      `${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
+        urlParams
+      )}`,
+      requestData
     ).then(res => res.json())
+  }
+}
+
+export default class SquareAPI {
+  static search(urlParams) {
+    return Helper.simpleFetch('/venues/search', 'GET', urlParams)
+  }
+  static getVenueDetails(VENUE_ID) {
+    return Helper.simpleFetch(`/venues/${VENUE_ID}`, 'GET')
+  }
+  static getVenuePhotos(VENUE_ID) {
+    return Helper.simpleFetch(`/venues/${VENUE_ID}/photos`, 'GET')
   }
 }

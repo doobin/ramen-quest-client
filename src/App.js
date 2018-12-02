@@ -9,6 +9,7 @@ import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import Map from './components/Map'
+import SquareAPI from './api'
 
 class App extends Component {
   constructor () {
@@ -17,7 +18,11 @@ class App extends Component {
     this.state = {
       user: null,
       flashMessage: '',
-      flashType: null
+      flashType: null,
+      venues: [],
+      markers: [],
+      center: [],
+      zoom: 12
     }
   }
 
@@ -34,9 +39,29 @@ class App extends Component {
     }), 2000)
   }
 
+  componentDidMount() {
+    SquareAPI.search({
+      near: 'Boston,MA',
+      query: 'ramen'
+    })
+      .then(results => {
+        const { venues } = results.response
+        const { center } = results.response.geocode.feature.geometry
+        const markers = venues.map(venue => {
+          return {
+            lat: venue.location.lat,
+            lng: venue.location.lng,
+            isOpen: false,
+            isVisible: true
+          }
+        })
+        this.setState({ venues, center, markers })
+        console.log(results)
+      })
+  }
+
   render () {
     const { flashMessage, flashType, user } = this.state
-    const markersHistory = JSON.parse(localStorage.getItem('markersHistory')) || []
 
     return (
       <React.Fragment>
@@ -57,7 +82,7 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
         </main>
-        <Map />
+        <Map {...this.state} />
       </React.Fragment>
     )
   }
