@@ -9,7 +9,7 @@ import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import Map from './components/Map'
-import SquareAPI from './api'
+import FourSquareAPI from './api'
 
 class App extends Component {
   constructor () {
@@ -39,8 +39,22 @@ class App extends Component {
     }), 2000)
   }
 
+  closeAllMarkers = () => {
+    const markers = this.state.markers.map(marker => {
+      marker.isOpen = false
+      return marker
+    })
+    this.setState({ markers: Object.assign(this.state.markers, markers) })
+  }
+
+  handleMarkerClick = marker => {
+    this.closeAllMarkers()
+    marker.isOpen = true
+    this.setState({ markers: Object.assign(this.state.markers, marker) })
+  }
+
   componentDidMount() {
-    SquareAPI.search({
+    FourSquareAPI.search({
       near: 'Boston,MA',
       query: 'ramen'
     })
@@ -82,7 +96,7 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
         </main>
-        <Map {...this.state} />
+        <Map {...this.state} handleMarkerClick={this.handleMarkerClick}/>
       </React.Fragment>
     )
   }
