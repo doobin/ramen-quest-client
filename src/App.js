@@ -8,11 +8,7 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
-import Title from './components/Title'
-import Form from './components/Form'
-import Restaurant from './components/Restaurant'
-import SearchNearMeButton from './components/SearchNearMeButton'
-import Container from './components/GoogleApi/Container'
+import Map from './components/Map'
 
 class App extends Component {
   constructor () {
@@ -40,6 +36,7 @@ class App extends Component {
 
   render () {
     const { flashMessage, flashType, user } = this.state
+    const markersHistory = JSON.parse(localStorage.getItem('markersHistory')) || []
 
     return (
       <React.Fragment>
@@ -60,11 +57,7 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
         </main>
-        <Title />
-        <Form getRestaurant={this.getRestaurant}/>
-        <SearchNearMeButton />
-        <Restaurant />
-        <Container />
+        <Map />
       </React.Fragment>
     )
   }
