@@ -5,6 +5,12 @@ class Sidebar extends Component {
   render () {
     return (
       <div className='sidebar'>
+        <input
+          type={'search'}
+          id={'search'}
+          placeholder={'Search Location...'}
+        />
+        <button type={'submit'}>Find</button>
         <VenueList />
       </div>
     )
