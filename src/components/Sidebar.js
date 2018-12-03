@@ -10,8 +10,8 @@ class Sidebar extends Component {
           id={'search'}
           placeholder={'Search Location...'}
         />
-        <button type={'submit'}>Find</button>
-        <VenueList />
+        <button type={'submit'} id={'find-button'}>Find</button>
+        <VenueList {...this.props} />
       </div>
     )
   }

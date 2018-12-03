@@ -4,7 +4,7 @@ class ListItem extends Component {
   render () {
     return (
       <li className='listitem'>
-        Hello World
+        {this.props.name}
       </li>
     )
   }

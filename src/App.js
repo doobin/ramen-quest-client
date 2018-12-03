@@ -106,7 +106,7 @@ class App extends Component {
           )} />
         </main>
         <div className='map'>
-          <Sidebar />
+          <Sidebar {...this.state}/>
           <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
         </div>
       </React.Fragment>

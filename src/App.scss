@@ -55,4 +55,27 @@ $charcoal: #ccc;
   .sidebar {
     width: 25%;
   }
+  #search {
+    width: 75%;
+    height: 2rem;
+    font-size: 1rem;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  #find-button {
+    width: 25%;
+    height: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .venuelist {
+    padding: 1rem;
+    .listitem {
+      list-style: none;
+      font-size: 1rem;
+      padding: .5rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+  }
 }
