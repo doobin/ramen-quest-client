@@ -62,6 +62,10 @@ class App extends Component {
       })
   }
 
+  handleListItemClick = venue => {
+    console.log(venue)
+  }
+
   componentDidMount() {
     FourSquareAPI.search({
       near: 'Boston,MA',
@@ -106,7 +110,7 @@ class App extends Component {
           )} />
         </main>
         <div className='map'>
-          <Sidebar {...this.state}/>
+          <Sidebar {...this.state} handleListItemClick={this.handleListItemClick}/>
           <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
         </div>
       </React.Fragment>

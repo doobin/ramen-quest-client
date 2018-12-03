@@ -7,7 +7,11 @@ class VenueList extends Component {
       <ol className='venuelist'>
         {this.props.venues &&
           this.props.venues.map((venue, idx) => (
-            <ListItem key={idx} {...venue} />
+            <ListItem
+              key={idx}
+              {...venue}
+              handleListItemClick={this.props.handleListItemClick}
+            />
           ))}
       </ol>
     )
