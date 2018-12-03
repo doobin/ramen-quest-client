@@ -40,6 +40,7 @@ class App extends Component {
     }), 2000)
   }
 
+  // close all open display windows
   closeAllMarkers = () => {
     const markers = this.state.markers.map(marker => {
       marker.isOpen = false
@@ -48,6 +49,8 @@ class App extends Component {
     this.setState({ markers: Object.assign(this.state.markers, markers) })
   }
 
+  // Open display window when marker is clicked and get venue details from
+  // FourSquare API
   handleMarkerClick = marker => {
     this.closeAllMarkers()
     marker.isOpen = true
@@ -63,9 +66,12 @@ class App extends Component {
   }
 
   handleListItemClick = venue => {
-    console.log(venue)
+    const marker = this.state.markers.find(marker => marker.id === venue.id)
+    this.handleMarkerClick(marker)
   }
 
+  // once map renders, send request to FourSquare API, pass results to marker
+  // components
   componentDidMount() {
     FourSquareAPI.search({
       near: 'Boston,MA',
