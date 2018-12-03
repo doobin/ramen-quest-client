@@ -75,8 +75,10 @@ $charcoal: #ccc;
       padding: .5rem;
       margin-top: 1rem;
       cursor: pointer;
-      background: #5757fe;
+      background: #006400;
       color: white;
+      display: flex;
+      align-items: center;
       box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
   }
