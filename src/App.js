@@ -10,6 +10,7 @@ import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import Map from './components/Map'
 import FourSquareAPI from './api'
+import Sidebar from './components/Sidebar'
 
 class App extends Component {
   constructor () {
@@ -51,6 +52,14 @@ class App extends Component {
     this.closeAllMarkers()
     marker.isOpen = true
     this.setState({ markers: Object.assign(this.state.markers, marker) })
+    const venue = this.state.venues.find(venue => venue.id === marker.id)
+
+    FourSquareAPI.getVenueDetails(marker.id)
+      .then(res => {
+        const newVenue = Object.assign(venue, res.response.venue)
+        this.setState({ venues: Object.assign(this.state.venues, newVenue) })
+        console.log(newVenue)
+      })
   }
 
   componentDidMount() {
@@ -66,11 +75,11 @@ class App extends Component {
             lat: venue.location.lat,
             lng: venue.location.lng,
             isOpen: false,
-            isVisible: true
+            isVisible: true,
+            id: venue.id
           }
         })
         this.setState({ venues, center, markers })
-        console.log(results)
       })
   }
 
@@ -82,7 +91,7 @@ class App extends Component {
         <Header user={user} />
         {flashMessage && <h3 className={flashType}>{flashMessage}</h3>}
 
-        <main className="container">
+        <main className='container'>
           <Route path='/sign-up' render={() => (
             <SignUp flash={this.flash} setUser={this.setUser} />
           )} />
@@ -96,7 +105,10 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
         </main>
-        <Map {...this.state} handleMarkerClick={this.handleMarkerClick}/>
+        <div className='map'>
+          <Sidebar />
+          <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
+        </div>
       </React.Fragment>
     )
   }

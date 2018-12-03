@@ -47,6 +47,12 @@ $charcoal: #ccc;
   }
 }
 
-.wrapper {
+.map {
+  height: 100vh;
+  width: 75vw;
   display: flex;
+  flex-flow: row nowrap;
+  .sidebar {
+    width: 25%;
+  }
 }
