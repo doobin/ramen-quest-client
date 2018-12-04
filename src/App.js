@@ -15,6 +15,7 @@ import Sidebar from './components/Sidebar'
 class App extends Component {
   constructor () {
     super()
+    this.handleSubmit = this.handleSubmit.bind(this)
 
     this.state = {
       user: null,
@@ -78,6 +79,7 @@ class App extends Component {
       query: 'ramen'
     })
       .then(results => {
+        console.log(results)
         const { venues } = results.response
         const { center } = results.response.geocode.feature.geometry
         const markers = venues.map(venue => {
@@ -91,6 +93,31 @@ class App extends Component {
         })
         this.setState({ venues, center, markers })
       })
+  }
+
+  async handleSubmit (event) {
+    event.preventDefault()
+    const city = event.target.elements.city.value
+    const results = await FourSquareAPI.search({
+      near: city,
+      query: 'ramen'
+    })
+    console.log(results)
+    const { venues } = results.response
+    console.log(venues)
+    const { center } = results.response.geocode.feature.geometry
+    console.log(center)
+    const markers = venues.map(venue => {
+      return {
+        lat: venue.location.lat,
+        lng: venue.location.lng,
+        isOpen: false,
+        isVisible: true,
+        id: venue.id
+      }
+    })
+    console.log(markers)
+    this.setState({ venues, center, markers })
   }
 
   render () {
@@ -116,7 +143,7 @@ class App extends Component {
           )} />
         </main>
         <div className='map'>
-          <Sidebar {...this.state} handleListItemClick={this.handleListItemClick}/>
+          <Sidebar {...this.state} handleListItemClick={this.handleListItemClick} handleSubmit={this.handleSubmit}/>
           <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
         </div>
       </React.Fragment>
