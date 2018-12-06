@@ -11,6 +11,7 @@ import ChangePassword from './auth/components/ChangePassword'
 import Map from './components/Map'
 import FourSquareAPI from './api'
 import Sidebar from './components/Sidebar'
+import UserList from './components/UserList'
 
 class App extends Component {
   constructor () {
@@ -149,6 +150,12 @@ class App extends Component {
             handleSubmit={this.handleSubmit}
           />
           <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
+          <AuthenticatedRoute user={user} path='/venues' render={() => (
+            <UserList {...this.state}
+              handleSubmit={this.handleSubmit}
+            />
+          )}
+          />
         </div>
       </React.Fragment>
     )
