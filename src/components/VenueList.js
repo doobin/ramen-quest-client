@@ -10,6 +10,7 @@ class VenueList extends Component {
             <ListItem
               key={idx}
               {...venue}
+              {...this.props}
               handleListItemClick={this.props.handleListItemClick}
             />
           ))}

@@ -15,7 +15,6 @@ import Sidebar from './components/Sidebar'
 class App extends Component {
   constructor () {
     super()
-    this.handleSubmit = this.handleSubmit.bind(this)
 
     this.state = {
       user: null,
@@ -26,6 +25,7 @@ class App extends Component {
       center: [],
       zoom: 12
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   setUser = user => this.setState({ user })
@@ -143,7 +143,11 @@ class App extends Component {
           )} />
         </main>
         <div className='map'>
-          <Sidebar {...this.state} handleListItemClick={this.handleListItemClick} handleSubmit={this.handleSubmit}/>
+          <Sidebar
+            {...this.state}
+            handleListItemClick={this.handleListItemClick}
+            handleSubmit={this.handleSubmit}
+          />
           <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
         </div>
       </React.Fragment>

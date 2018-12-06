@@ -27,6 +27,7 @@ const MyMapComponent = withScriptjs(
                       alt={'Venue image'} />
                     <p>{venueInfo.name}</p>
                     <p>Rating: {venueInfo.rating}</p>
+                    <p>Address: {venueInfo.location.address}</p>
                   </React.Fragment>
                 </InfoWindow>
               )}
