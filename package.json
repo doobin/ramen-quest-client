@@ -1,6 +1,6 @@
 {
-  "name": "ramen-quest",
-  "homepage": "https://github.io/doobin/ramen-quest",
+  "name": "ramen-quest-client",
+  "homepage": "https://doobin.github.io/ramen-quest-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -61,9 +61,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "make-standard": "eslint --fix .",
     "nag": "eslint .",
-    "deploy": "sh scripts/deploy.sh",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "jest": {
     "collectCoverageFrom": [
