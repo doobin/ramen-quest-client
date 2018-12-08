@@ -146,12 +146,15 @@ class App extends Component {
         <div className='map'>
           <Sidebar
             {...this.state}
+            flash={this.flash}
             handleListItemClick={this.handleListItemClick}
             handleSubmit={this.handleSubmit}
           />
           <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
           <AuthenticatedRoute user={user} path='/venues' render={() => (
-            <UserList {...this.state}
+            <UserList
+              {...this.state}
+              flash={this.flash}
               handleSubmit={this.handleSubmit}
             />
           )}
