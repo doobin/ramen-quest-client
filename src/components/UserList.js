@@ -16,8 +16,6 @@ class UserList extends Component {
       value: ''
     }
     this.deleteVenue = this.deleteVenue.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   flash = (message, type) => {
@@ -41,43 +39,29 @@ class UserList extends Component {
   }
 
   async deleteVenue(event) {
-    const { user } = this.props
-    console.log(user)
+    const { user, flash } = this.props
     const id = event.target.value
-    console.log(id)
     await axios.delete(`${apiUrl}/venues/${id}`,
       {
         headers: {
           'Authorization':`Token token=${user.token}`}
       }
     )
-      .then(() => this.props.flash(messages.deleteVenueSuccess, 'flash-success'))
-      .catch(() => this.props.flash(messages.deleteVenueFailure, 'flash-error'))
+      .then(() => flash(messages.deleteVenueSuccess, 'flash-success'))
+      .catch(() => flash(messages.deleteVenueFailure, 'flash-error'))
     this.setState({ deleted: true })
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value})
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
+    this.componentDidMount()
   }
 
   render () {
-    if (this.state.deleted === true) {
-      return <Redirect to='/' />
-    }
     let venueRows
     const { venues } = this.state
-    console.log(venues)
 
     if (venues.length === 0) {
       venueRows = <tr><td>Loading</td></tr>
     } else {
       venueRows = venues.map(venue => {
         const { _id, name, rating } = venue
-        console.log(_id)
         return (
           <tr key={_id}>
             <td>

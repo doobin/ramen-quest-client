@@ -63,24 +63,23 @@ class App extends Component {
       .then(res => {
         const newVenue = Object.assign(venue, res.response.venue)
         this.setState({ venues: Object.assign(this.state.venues, newVenue) })
-        console.log(newVenue)
       })
   }
 
+  //Render InfoWindow on the map once list item is clicked
   handleListItemClick = venue => {
     const marker = this.state.markers.find(marker => marker.id === venue.id)
     this.handleMarkerClick(marker)
   }
 
-  // once map renders, send request to FourSquare API, pass results to marker
-  // components
+  // Once map renders, send request to FourSquare API, use results to set venues, map center,
+  // and markers state
   componentDidMount() {
     FourSquareAPI.search({
       near: 'Boston,MA',
       query: 'ramen'
     })
       .then(results => {
-        console.log(results)
         const { venues } = results.response
         const { center } = results.response.geocode.feature.geometry
         const markers = venues.map(venue => {
@@ -96,6 +95,8 @@ class App extends Component {
       })
   }
 
+  // Send search request to FourSquare API, use results to set venues, map center,
+  // and markers state
   async handleSubmit (event) {
     event.preventDefault()
     const city = event.target.elements.city.value
@@ -103,11 +104,8 @@ class App extends Component {
       near: city,
       query: 'ramen'
     })
-    console.log(results)
     const { venues } = results.response
-    console.log(venues)
     const { center } = results.response.geocode.feature.geometry
-    console.log(center)
     const markers = venues.map(venue => {
       return {
         lat: venue.location.lat,
@@ -117,7 +115,6 @@ class App extends Component {
         id: venue.id
       }
     })
-    console.log(markers)
     this.setState({ venues, center, markers })
   }
 
@@ -143,6 +140,9 @@ class App extends Component {
             <ChangePassword flash={this.flash} user={user} />
           )} />
         </main>
+        <div>
+          <h3>Where can I find a good bowl of ramen?</h3>
+        </div>
         <div className='map'>
           <Sidebar
             {...this.state}

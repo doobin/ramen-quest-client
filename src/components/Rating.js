@@ -21,14 +21,11 @@ class Rating extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault()
-    const { user } = this.props
-    console.log(user)
+    const { user, value, flash } = this.props
     const venueRating = { venue: {
       rating: this.state.value }
     }
-    console.log(venueRating)
-    const id = this.props.value
-    console.log(this.props)
+    const id = value
     await axios.patch(`${apiUrl}/venues/${id}`, venueRating,
       {
         headers: {
@@ -36,8 +33,8 @@ class Rating extends React.Component {
           'Authorization':`Token token=${user.token}`}
       }
     )
-      .then(() => this.props.flash(messages.updateRatingSuccess, 'flash-success'))
-      .catch(() => this.props.flash(messages.updateRatingFailure, 'flash-error'))
+      .then(() => flash(messages.updateRatingSuccess, 'flash-success'))
+      .catch(() => flash(messages.updateRatingFailure, 'flash-error'))
   }
 
   render() {

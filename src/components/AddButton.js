@@ -21,29 +21,27 @@ class AddButton extends Component {
     }), 2000)
   }
 
-handleAddClick = async (event) => {
-  event.preventDefault()
-  const { user, name } = this.props
-  console.log(user)
-  const venueName = { venue: {
-    name: name }
-  }
-  console.log(venueName)
-  const response = await axios.post(`${apiUrl}/venues`, venueName,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization':`Token token=${user.token}`}
+  handleAddClick = async (event) => {
+    event.preventDefault()
+    const { user, name, flash } = this.props
+    const venueName = { venue: {
+      name: name }
     }
-  )
-    .then(() => this.props.flash(messages.addVenueSuccess, 'flash-success'))
-    .catch(() => this.props.flash(messages.addVenueFailure, 'flash-error'))
-}
-render() {
-  return (
-    <button className='addbutton' onClick={this.handleAddClick} type='button'>+</button>
-  )
-}
+    const response = await axios.post(`${apiUrl}/venues`, venueName,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Token token=${user.token}`}
+      }
+    )
+      .then(() => flash(messages.addVenueSuccess, 'flash-success'))
+      .catch(() => flash(messages.addVenueFailure, 'flash-error'))
+  }
+  render() {
+    return (
+      <button className='addbutton' onClick={this.handleAddClick} type='button'>+</button>
+    )
+  }
 }
 
 export default AddButton
