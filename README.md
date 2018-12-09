@@ -22,7 +22,7 @@ demo
 
 https://github.com/doobin/ramen-quest-api
 
-## Link to deployed Server
+## Link to Deployed Server
 
 https://radiant-brushlands-40574.herokuapp.com/
 
